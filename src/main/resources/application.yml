@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: db-cruder
+  main:
+    web-application-type: none
+  kafka:
+    bootstrap-servers: 192.168.1.234:9092
+    consumer:
+      enable-auto-commit: true
+      group-id: db_cruder_consumer_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+io:
+  reflectoring:
+    kafka:
+      enabled: true
+      topic-to-read-instructions: DBCruder
+      topic-to-send-response-error: DBCruderErrors
