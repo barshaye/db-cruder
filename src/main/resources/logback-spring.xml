@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <jmxConfigurator/>
+
+  <property name="LOG_PATH" value="/logs"/>
+
+  <include resource="org/org/springframework/boot/logging/logback/defaults.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+  <include resource="org/org/springframework/boot/logging/logback/file-appender.xml"/>
+  <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+  <appender name="E2E_ELASTIC" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>elk-dev-lgst-01:5044</destination>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>logs/localhost.log</file>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <logger name="org.springframework.kafka" level="DEBUG"/>
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="ES-ELASTIC"/>
+  </root>
+
+  <logger name="FILE" level="INFO" additivity="false"/>
+</configuration>
