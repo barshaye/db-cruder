@@ -18,3 +18,4 @@ io:
       enabled: true
       topic-to-read-instructions: DBCruder
       topic-to-send-response-error: DBCruderErrors
+

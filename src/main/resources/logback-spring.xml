@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <jmxConfigurator/>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <append>true</append>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
 
-  <property name="LOG_PATH" value="/logs"/>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>logs/db-cruder%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+      <maxFileSize>10MB</maxFileSize>
+      <maxHistory>20</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+  </appender>
 
-  <include resource="org/org/springframework/boot/logging/logback/defaults.xml"/>
-  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
-  <include resource="org/org/springframework/boot/logging/logback/file-appender.xml"/>
-  <include resource="org/springframework/boot/logging/logback/base.xml" />
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
 
   <appender name="E2E_ELASTIC" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <destination>elk-dev-lgst-01:5044</destination>
+    <destination>localhost:5044</destination>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
   </appender>
 
-  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>logs/localhost.log</file>
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>
-    </encoder>
-  </appender>
+  <property scope="context" name="appName" value="db-cruder"/>
   <logger name="org.springframework.kafka" level="DEBUG"/>
-  <root level="INFO">
-    <appender-ref ref="CONSOLE"/>
-    <appender-ref ref="FILE"/>
-    <appender-ref ref="ES-ELASTIC"/>
-  </root>
 
-  <logger name="FILE" level="INFO" additivity="false"/>
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="STDOUT" />
+    <!--appender-ref ref="ES-ELASTIC"/-->
+  </root>
 </configuration>
