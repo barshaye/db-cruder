@@ -16,20 +16,17 @@
 
   <properties>
     <java.version>17</java.version>
-    <spring.version>3.0.6</spring.version>
-    <logback-elasticsearch.version>3.0.8</logback-elasticsearch.version>
+    <logback.version>1.4.14</logback.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>${spring.version}</version>
     </dependency>
 
     <dependency>
@@ -43,12 +40,11 @@
       <version>1.18.24</version>
     </dependency>
     <dependency>
-      <groupId>com.agido</groupId>
-      <artifactId>logback-elasticsearch-appender</artifactId>
-      <version>${logback-elasticsearch.version}</version>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>7.4</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api-trace -->
     <dependency>
       <groupId>io.opentelemetry</groupId>
       <artifactId>opentelemetry-api-trace</artifactId>
@@ -59,7 +55,6 @@
       <artifactId>opentelemetry-sdk-trace</artifactId>
       <version>1.25.0</version>
     </dependency>
-
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

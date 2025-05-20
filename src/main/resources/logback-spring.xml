@@ -1,36 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <append>true</append>
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
+<configuration debug="true">
 
-    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <fileNamePattern>logs/db-cruder%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
-      <maxFileSize>10MB</maxFileSize>
-      <maxHistory>20</maxHistory>
-      <totalSizeCap>1GB</totalSizeCap>
-    </rollingPolicy>
-  </appender>
-
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
-  </appender>
-
-  <appender name="E2E_ELASTIC" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <destination>localhost:5044</destination>
+  <appender name="LOGSTASH"
+    class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>localhost:5055</destination>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
   </appender>
 
-  <property scope="context" name="appName" value="db-cruder"/>
-  <logger name="org.springframework.kafka" level="DEBUG"/>
-
   <root level="INFO">
-    <appender-ref ref="FILE" />
-    <appender-ref ref="STDOUT" />
-    <!--appender-ref ref="ES-ELASTIC"/-->
+    <appender-ref ref="LOGSTASH"/>
   </root>
 </configuration>
