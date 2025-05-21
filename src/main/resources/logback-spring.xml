@@ -5,8 +5,15 @@
     <destination>localhost:5055</destination>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
   </appender>
-
-  <root level="INFO">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <logger name="E2E_ELASTIC" level="INFO">
     <appender-ref ref="LOGSTASH"/>
+  </logger>
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
   </root>
 </configuration>

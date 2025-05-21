@@ -14,7 +14,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 @EnableKafka
 @SpringBootApplication
 public class App {
-  private static final Logger LOG = LoggerFactory.getLogger("LOGSTASH");
+  private static final Logger LOG = LoggerFactory.getLogger("E2E_ELASTIC");
   public static void main(String[] args) {
       SpringApplication.run(App.class, args);
     try {
